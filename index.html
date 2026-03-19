@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>篆学 · 小篆字典</title>
+<!-- 峄山碑篆体：真实小篆字体（本地文件，已从 npm 提取） -->
+<link rel="stylesheet" href="fonts/ysbzt/result.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header id="appHeader">
+  <div class="logo" onclick="switchView('dictionary')">
+    篆学
+    <span></span>
+  </div>
+  <div class="nav-tabs" id="desktopTabs">
+    <button class="nav-tab active" data-view="dictionary">字典</button>
+    <button class="nav-tab" data-view="categories">分类</button>
+    <button class="nav-tab" data-view="quiz">测验</button>
+  </div>
+  <div class="search-wrapper">
+    <input type="text" id="searchInput" placeholder="搜索简体字或拼音…" autocomplete="off">
+    <span class="search-icon">⌕</span>
+  </div>
+</header>
+
+<!-- Hero 区域 -->
+<section class="hero" id="heroSection">
+  <div class="hero-inner">
+    <div class="hero-seal-wrap">
+      <div class="hero-badge">小篆</div>
+      <div class="hero-seal">
+        <span class="hero-seal-char seal-font" id="heroSealChar">山</span>
+      </div>
+      <div class="hero-arrow">↓</div>
+      <div class="hero-simp-row">
+        <span class="hero-simp-label">简体</span>
+        <span class="hero-simp-char" id="heroSimpChar">山</span>
+        <span class="hero-pinyin" id="heroPinyin">shān</span>
+      </div>
+    </div>
+    <div class="hero-text">
+      <h1 class="hero-title">探索小篆之美</h1>
+      <p class="hero-sub" id="heroMeaning">山岳，高峻地形，象三峰连绵之形</p>
+      <p class="hero-note">
+        小篆由秦朝李斯统一文字而成，字形圆润匀称，上承甲骨金文，下启隶楷草书。<br>
+        本站字形使用<strong>峄山碑篆体</strong>（免费商用），以真实小篆笔意呈现。
+      </p>
+      <div class="hero-stats" id="heroStats"></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- 字典视图 -->
+  <div class="view active" id="view-dictionary">
+    <div class="filter-bar">
+      <span class="filter-label">分类：</span>
+      <div class="filter-btns" id="filterBtns"></div>
+    </div>
+    <div class="section-header">
+      <span class="section-title">字典</span>
+      <span class="section-count" id="dictCount"></span>
+    </div>
+    <div class="card-grid" id="dictGrid"></div>
+  </div>
+
+  <!-- 分类视图 -->
+  <div class="view" id="view-categories">
+    <div class="section-header"><span class="section-title">按类浏览</span></div>
+    <div class="cat-grid" id="catGrid"></div>
+    <div id="catCharSection" style="display:none">
+      <div class="cat-section-title" id="catSectionTitle"></div>
+      <div class="card-grid" id="catCharGrid"></div>
+    </div>
+  </div>
+
+  <!-- 测验视图 -->
+  <div class="view" id="view-quiz">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <span class="quiz-progress" id="quizProgress">第 1 / 10 题</span>
+        <span class="quiz-score" id="quizScore">得分：0</span>
+      </div>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-question-label">看小篆字形 → 选出对应简体字</div>
+        <div class="quiz-badge">小篆</div>
+        <div class="quiz-seal">
+          <span class="quiz-seal-char seal-font" id="quizChar">山</span>
+        </div>
+        <div class="quiz-hint" id="quizHint">笔画：3 &nbsp;·&nbsp; 部首：山</div>
+      </div>
+      <div class="quiz-choices" id="quizChoices"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="quiz-next-btn" id="quizNextBtn" style="display:none" onclick="quizNext()">下一题 →</button>
+      <div class="quiz-result" id="quizResult">
+        <div class="quiz-result-score" id="quizResultScore">8/10</div>
+        <div class="quiz-result-label">答题完成！</div>
+        <div class="quiz-result-msg" id="quizResultMsg"></div>
+        <button class="quiz-restart" onclick="startQuiz()">再来一次</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- 手机底部导航 -->
+<nav class="mobile-bottom-nav">
+  <button class="nav-tab active" data-view="dictionary">
+    <span class="tab-icon seal-font">典</span>字典
+  </button>
+  <button class="nav-tab" data-view="categories">
+    <span class="tab-icon seal-font">类</span>分类
+  </button>
+  <button class="nav-tab" data-view="quiz">
+    <span class="tab-icon seal-font">测</span>测验
+  </button>
+</nav>
+
+<!-- 字符详情弹层 -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalPanel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- 顶部：小篆 + 简体 + 拼音 -->
+    <div class="modal-header-row">
+      <div class="modal-seal-wrap">
+        <div class="modal-badge">小篆</div>
+        <div class="modal-seal">
+          <span class="modal-seal-char seal-font" id="mSealChar"></span>
+        </div>
+      </div>
+      <div class="modal-arrow-col">
+        <div class="modal-arrow">→</div>
+        <div class="modal-corr-label">简体对应</div>
+      </div>
+      <div class="modal-simp-wrap">
+        <div class="modal-badge">简体</div>
+        <div class="modal-simp-char" id="mSimpChar"></div>
+        <div class="modal-pinyin" id="mPinyin"></div>
+      </div>
+    </div>
+
+    <div class="modal-meta-row" id="mMeta"></div>
+
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">字义</div>
+        <div class="modal-meaning" id="mMeaning"></div>
+      </div>
+      <div class="modal-section" id="mDescSection">
+        <div class="modal-section-title">字形演变</div>
+        <div class="modal-seal-desc" id="mDesc"></div>
+      </div>
+      <div class="modal-section" id="mShuowenSection">
+        <div class="modal-section-title">说文解字</div>
+        <div class="modal-shuowen" id="mShuowen"></div>
+      </div>
+      <div class="modal-section" id="mExSection">
+        <div class="modal-section-title">常用词例</div>
+        <div class="modal-examples" id="mExamples"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

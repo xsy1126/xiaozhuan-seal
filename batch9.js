@@ -1,0 +1,11 @@
+// Batch 9: top-up to reach 800 (791-800)
+{c:"周",py:"zhōu",m:"周期",cat:"时间",rad:"口",st:8},
+{c:"昨",py:"zuó",m:"昨天",cat:"时间",rad:"日",st:9},
+{c:"今",py:"jīn",m:"今天",cat:"时间",rad:"人",st:4},
+{c:"明",py:"míng",m:"明天",cat:"时间",rad:"日",st:8},
+{c:"朝",py:"zhāo",m:"早晨",cat:"时间",rad:"月",st:12},
+{c:"暮",py:"mù",m:"傍晚",cat:"时间",rad:"日",st:15},
+{c:"午",py:"wǔ",m:"正午",cat:"时间",rad:"十",st:4},
+{c:"夜",py:"yè",m:"夜晚",cat:"时间",rad:"夕",st:8},
+{c:"晓",py:"xiǎo",m:"拂晓",cat:"时间",rad:"日",st:10},
+{c:"曦",py:"xī",m:"晨曦",cat:"时间",rad:"日",st:20},
