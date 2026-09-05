@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>四字篆印 · 手作印章版</title>
+<link rel="stylesheet" href="fonts/ysbzt/result.css">
+<link rel="stylesheet" href="css/four.css">
+<link rel="stylesheet" href="css/stamp.css">
+<link rel="stylesheet" href="css/compact.css">
+<script src="js/four.js" defer></script>
+<script src="js/stamp.js" defer></script>
+</head>
+<body>
+<header><span>篆学 · 四字篆印</span><a href="http://127.0.0.1:8081/four.html">对比矩阵版 ↗</a></header>
+<main>
+<section>
+<p class="eyebrow">方寸之间 · 自有章法</p><h1>把四个字，刻成一方印。</h1>
+<p class="intro">让字形有些错落，让印边留一点岁月。四字按左上、左下、右上、右下排列，先左列，再右列。</p>
+<form id="sealForm"><label for="sealInput">你的四个字</label><input id="sealInput" value="天下太平" placeholder="例如：天下太平" autocomplete="off" aria-describedby="status"><button>生成小篆</button></form>
+<p id="status" role="status" aria-live="polite"></p>
+<div class="examples"><span>试一试</span><button data-text="天下太平">天下太平</button><button data-text="山高水长">山高水长</button><button data-text="春和景明">春和景明</button></div>
+<div class="stamp-controls">
+<div class="style-buttons" role="group" aria-label="刻式"><button type="button" id="whiteStyle" aria-pressed="true">白文 · 红底白字</button><button type="button" id="redStyle" aria-pressed="false">朱文 · 红字留白</button></div>
+<label for="freedom">字形错落 <span id="freedomValue">适中</span></label><input type="range" id="freedom" min="0" max="100" value="55">
+<label class="texture-toggle"><input type="checkbox" id="texture" checked> 印泥斑驳</label>
+<button type="button" id="shuffleStamp">换一种章法 ↻</button>
+</div>
+</section>
+<section class="preview" aria-label="小篆预览"><p class="preview-title">印蜕预览 <span>手作篆印</span></p>
+<div class="stamp-paper"><div class="seal white-style" id="sealGrid"><div class="cell" data-position="a11"></div><div class="cell" data-position="a12"></div><div class="cell" data-position="a21"></div><div class="cell" data-position="a22"></div><svg id="wear" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true"></svg></div></div>
+<p id="caption">等待生成</p><p class="note">四字一印 · 疏密相生</p></section>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><filter id="carved" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="12" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+</main></body></html>
