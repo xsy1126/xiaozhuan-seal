@@ -1,4 +1,4 @@
 /* Tight ink-to-ink spacing with a small allowance for hand-carved variation. */
-.seal { padding: 3px; }
+.seal { padding: 1px; }
 .cell { text-shadow: none !important; }
-.cell > svg { display: block; width: 94%; height: 94%; overflow: visible; }
+.cell > svg { display: block; width: 97%; height: 97%; overflow: visible; }
