@@ -10,7 +10,6 @@ function arrangeStamp() {
   document.querySelectorAll('.cell').forEach(cell => {
     cell.style.setProperty('--dx', `${(random() - .5) * 1.2 * amount}%`);
     cell.style.setProperty('--dy', `${(random() - .5) * 1.2 * amount}%`);
-    cell.style.setProperty('--angle', `${(random() - .5) * 1.8 * amount}deg`);
     cell.style.setProperty('--sx', 1 + (random() - .5) * .018 * amount);
     cell.style.setProperty('--sy', 1 + (random() - .5) * .018 * amount);
   });
